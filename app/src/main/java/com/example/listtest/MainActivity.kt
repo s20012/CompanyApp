@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     private fun apiList(){
         val handler = HandlerCompat.createAsync(mainLooper)
         val executeService = Executors.newSingleThreadExecutor()
-        val apiUrl = "https://job.yahooapis.jp/v1/furusato/company/?appid="
+        val apiUrl = "https://job.yahooapis.jp/v1/furusato/jobinfo/?appid="
         val apiId = "dj00aiZpPTZ0Q0FSSFhnbThJRyZzPWNvbnN1bWVyc2VjcmV0Jng9MGM-"
         executeService.submit @WorkerThread {
             var result = ""
@@ -72,8 +72,8 @@ class MainActivity : AppCompatActivity() {
 
                 repeat(num) {
                     val index = results.getJSONObject(s)
-                    val name = index.getString("name")
-                    val logoSp = index.getString("logoImgUrlPc")
+                    val name = index.getString("title")
+                    val logoSp = index.getString("imgUrlSp")
                     dataList.add((Data().apply {
                         icon?.let { it1 ->
                             Glide.with(this@MainActivity)
