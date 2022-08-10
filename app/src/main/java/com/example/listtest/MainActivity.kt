@@ -2,7 +2,6 @@ package com.example.listtest
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -44,14 +43,13 @@ class MainActivity : AppCompatActivity() {
         val apiId = "dj00aiZpPTZ0Q0FSSFhnbThJRyZzPWNvbnN1bWVyc2VjcmV0Jng9MGM-"
         executeService.submit @WorkerThread {
             var result = ""
-            val num = 100
             var s = 0
-            val url = URL("$apiUrl$apiId&results=$num")
+            val url = URL("$apiUrl$apiId&results=100&start=100")
             val con = url.openConnection() as? HttpURLConnection
             con?.let {
                 try {
-                    it.connectTimeout = 10000
-                    it.readTimeout = 10000
+                    it.connectTimeout = 1000
+                    it.readTimeout = 1000
                     it.requestMethod = "GET"
                     it.connect()
                     val stream = it.inputStream
@@ -70,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 val rootJSON = JSONObject(result)
                 val results = rootJSON.getJSONArray("results")
 
-                repeat(num) {
+                repeat(100) {
                     val index = results.getJSONObject(s)
                     val name = index.getString("title")
                     val logoSp = index.getString("imgUrlSp")
@@ -84,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     }))
                     s += 1
                 }
-                val adapter = CustomAdapter(this, dataList.distinct() as ArrayList<Data>)
+                val adapter = CustomAdapter(this, dataList)
                 binding.listItem.adapter = adapter
 
 

@@ -23,6 +23,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/title"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@android:drawable/ic_menu_gallery"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

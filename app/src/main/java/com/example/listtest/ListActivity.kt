@@ -27,8 +27,6 @@ class ListActivity : AppCompatActivity() {
         binding = ActivityListBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-        val id = intent.getIntExtra("id", 0)
-        binding.listId.text = id.toString()
 
         apiList()
 
@@ -39,18 +37,18 @@ class ListActivity : AppCompatActivity() {
     private fun apiList(){
         val handler = HandlerCompat.createAsync(mainLooper)
         val executeService = Executors.newSingleThreadExecutor()
-        val apiUrl = "https://job.yahooapis.jp/v1/furusato/company/?appid="
+        val apiUrl = "https://job.yahooapis.jp/v1/furusato/jobinfo/?appid="
         val apiId = "dj00aiZpPTZ0Q0FSSFhnbThJRyZzPWNvbnN1bWVyc2VjcmV0Jng9MGM-"
+
+        //ここでHTTP通信を行いURLにリクエストをかけています
         executeService.submit @WorkerThread {
             var result = ""
-            val num = 100
-            var s = 0
-            val url = URL("$apiUrl$apiId&results=$num")
+            val url = URL("$apiUrl$apiId&results=100&start=100")
             val con = url.openConnection() as? HttpURLConnection
             con?.let {
                 try {
-                    it.connectTimeout = 10000
-                    it.readTimeout = 10000
+                    it.connectTimeout = 1000
+                    it.readTimeout = 1000
                     it.requestMethod = "GET"
                     it.connect()
                     val stream = it.inputStream
@@ -65,31 +63,31 @@ class ListActivity : AppCompatActivity() {
 
 
             handler.post @UiThread {
-                val dataList = arrayListOf<Data>()
                 val rootJSON = JSONObject(result)
                 val results = rootJSON.getJSONArray("results")
+                val id = intent.getIntExtra("id", 0)
+                val index = results.getJSONObject(id)
 
-                repeat(num) {
-                    val index = results.getJSONObject(s)
-                    val name = index.getString("name")
-                    val logoSp = index.getString("logoImgUrlPc")
-                    dataList.add((Data().apply {
-                        icon?.let { it1 ->
-                            Glide.with(this@ListActivity)
-                                .load(logoSp)
-                                .into(it1)
-                        }
-                        title = name
-                    }))
-                    s += 1
-                }
+                //【作業スペース】APIから情報取得
+                val logoSp = index.getString("imgUrlPc")
+                val note = index.getString("description")
+                val cpName = index.getString("cpName")
+
+
+                //画像表示
+                    Glide.with(this)
+                        .load(logoSp)
+                        .into(binding.imglogo)
+
+
+                //【作業スペース】レイアウトIDとAPI取得結果の紐付け
+                binding.listId.text = cpName
+
 
             }
 
         }
     }
-
-
 
     private fun is2String(stream: InputStream): String {
         val sb = StringBuilder()

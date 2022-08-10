@@ -13,10 +13,8 @@ class CustomAdapter(context: Context, list: ArrayList<Data>) : ArrayAdapter<Data
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var view  = convertView
         if (view == null) {
-            // 一行分のレイアウトを生成
             view  = LayoutInflater.from(context).inflate(R.layout.row_view, parent, false)
         }
-        // 一行分のデータを取得
         data = getItem(position) as Data
         view?.findViewById<ImageView>(R.id.user_icon).apply {  data.icon }
         view?.findViewById<TextView>(R.id.title)?.apply { text = data.title }
