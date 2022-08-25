@@ -1,25 +1,14 @@
 package com.example.listtest
 
-import android.annotation.SuppressLint
+
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.AdapterView
-import androidx.annotation.UiThread
-import androidx.annotation.WorkerThread
+import android.view.MotionEvent
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.HandlerCompat
-import com.bumptech.glide.Glide
 import com.example.listtest.databinding.ActivityMainBinding
-import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.SocketTimeoutException
-import java.net.URL
-import java.util.concurrent.Executors
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,86 +18,32 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.listItem.onItemClickListener = ListItemClick()
+        blinkText(binding.taptext, 1000, 500)
 
-        apiList()
-
+        supportActionBar?.hide()
     }
 
-    @SuppressLint("CheckResult")
-    private fun apiList(){
-        val handler = HandlerCompat.createAsync(mainLooper)
-        val executeService = Executors.newSingleThreadExecutor()
-        val apiUrl = "https://job.yahooapis.jp/v1/furusato/jobinfo/?appid="
-        val apiId = "dj00aiZpPTZ0Q0FSSFhnbThJRyZzPWNvbnN1bWVyc2VjcmV0Jng9MGM-"
-        executeService.submit @WorkerThread {
-            var result = ""
-            var s = 0
-            val url = URL("$apiUrl$apiId&results=100&start=100")
-            val con = url.openConnection() as? HttpURLConnection
-            con?.let {
-                try {
-                    it.connectTimeout = 1000
-                    it.readTimeout = 1000
-                    it.requestMethod = "GET"
-                    it.connect()
-                    val stream = it.inputStream
-                    result = is2String(stream)
+    override fun onTouchEvent(motionEvent: MotionEvent): Boolean {
+        when (motionEvent.action) {
+            MotionEvent.ACTION_DOWN -> {
+                val intent = Intent(this, SecondActivity::class.java)
+                startActivity(intent)
 
-                    stream.close()
-                } catch (e: SocketTimeoutException) {
-                    Log.d("TAG", "通信タイムアウト", e)
-                }
-                it.disconnect()
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
-
-
-            handler.post @UiThread {
-                val dataList = arrayListOf<Data>()
-                val rootJSON = JSONObject(result)
-                val results = rootJSON.getJSONArray("results")
-
-                repeat(100) {
-                    val index = results.getJSONObject(s)
-                    val name = index.getString("title")
-                    val logoSp = index.getString("imgUrlSp")
-                    dataList.add((Data().apply {
-                        icon?.let { it1 ->
-                            Glide.with(this@MainActivity)
-                                .load(logoSp)
-                                .into(it1)
-                        }
-                        title = name
-                    }))
-                    s += 1
-                }
-                val adapter = CustomAdapter(this, dataList)
-                binding.listItem.adapter = adapter
-
-
-            }
-
+            MotionEvent.ACTION_UP -> {}
+            MotionEvent.ACTION_MOVE -> {}
+            MotionEvent.ACTION_CANCEL -> {}
         }
+        return false
     }
 
-    private inner class  ListItemClick: AdapterView.OnItemClickListener {
-        override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            val intent = Intent(this@MainActivity, ListActivity::class.java)
-            intent.putExtra("id", position)
-            startActivity(intent)
-        }
-
-    }
-
-    private fun is2String(stream: InputStream): String {
-        val sb = StringBuilder()
-        val reader = BufferedReader(InputStreamReader(stream, "UTF-8"))
-        var line = reader.readLine()
-        while (line != null) {
-            sb.append(line)
-            line = reader.readLine()
-        }
-        reader.close()
-        return sb.toString()
+    private fun blinkText(txtView: TextView, duration: Long, offset: Long) {
+        val anm: Animation = AlphaAnimation(0.0f, 1.0f)
+        anm.duration = duration
+        anm.startOffset = offset
+        anm.repeatMode = Animation.REVERSE
+        anm.repeatCount = Animation.INFINITE
+        txtView.startAnimation(anm)
     }
 }

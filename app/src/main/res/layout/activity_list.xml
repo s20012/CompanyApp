@@ -6,48 +6,238 @@
     android:layout_height="match_parent"
     tools:context=".ListActivity">
 
-    <TextView
-        android:id="@+id/listId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
-
-    <ImageView
-        android:id="@+id/imglogo"
-        android:layout_width="0dp"
-        android:layout_height="162dp"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="1000dp"
+        android:layout_height="1000dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="TextView"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listId" />
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Barrier
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="235dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="206dp" />
+            <ImageView
+                android:id="@+id/company_img"
+                android:layout_width="248dp"
+                android:layout_height="178dp"
+                tools:src="@android:mipmap/sym_def_app_icon" />
+
+            <TextView
+                android:id="@+id/company_name"
+                android:layout_width="wrap_content"
+                android:layout_height="40sp"
+                android:text="@string/company_name"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/place_name"
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:background="#D4D4D4"
+                android:text="@string/place_name"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/post_code"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/post_code"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/address_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/address_name"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tel"
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:background="#D4D4D4"
+                android:text="@string/tel"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tel_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tel_number"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/industry"
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:background="#D4D4D4"
+                android:text="@string/industry"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/industry_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/industry_content"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/business_content"
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:background="#D4D4D4"
+                android:text="@string/business_content"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/business_content_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/business_content_content"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/working_time"
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:background="#D4D4D4"
+                android:text="@string/working_time"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/working_time_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/working_time_content"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/working_place"
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:background="#D4D4D4"
+                android:text="@string/working_place"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/working_place_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/working_place_content"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/salary"
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:background="#D4D4D4"
+                android:text="@string/salary"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/salary_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/salary_content"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/employment_status"
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:background="#D4D4D4"
+                android:text="@string/employment_status"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/employment_status_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/employment_status_content"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/holiday"
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:background="#D4D4D4"
+                android:text="@string/holiday"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/holiday_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/holiday_content"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/insurance"
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:background="#D4D4D4"
+                android:text="@string/insurance"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/insurance_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/insurance_content"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/test_period"
+                android:layout_width="match_parent"
+                android:layout_height="30sp"
+                android:background="#D4D4D4"
+                android:text="@string/test_period"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/test_period_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/test_period_content"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/tel_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="電話をかける" />
+
+            <Button
+                android:id="@+id/mail_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="メールを送る" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

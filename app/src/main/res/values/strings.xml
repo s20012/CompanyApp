@@ -1,3 +1,31 @@
 <resources>
-    <string name="app_name">listTest</string>
+    <string name="app_name">ComMe</string>
+    <string name="tap_text">画面をタップしてはじめる</string>
+    <string name="company_name">株式会社ボルサリーノ</string>
+    <string name="place_name">所在地</string>
+    <string name="post_code">〒900-0022</string>
+    <string name="address_name">沖縄県那覇市樋川1丁目11-77</string>
+    <string name="tel_number">123-4567-8901</string>
+    <string name="industry_content">情報提供サービス</string>
+    <string name="recruitment_info">採用情報</string>
+    <string name="business_content">業務内容</string>
+    <string name="working_time">就業時間</string>
+    <string name="salary">賃金</string>
+    <string name="employment_status">雇用形態</string>
+    <string name="holiday">休日</string>
+    <string name="insurance">加入保険</string>
+    <string name="test_period">試用期間</string>
+    <string name="contract_period">契約期間</string>
+    <string name="business_content_content">顧客サポート、webの作成</string>
+    <string name="working_time_content">平日10:00~22:00のうち8時間\n休日9:00~22:00のうち8時間</string>
+    <string name="working_place">就業場所</string>
+    <string name="working_place_content">沖縄県那覇市樋川1丁目1-77</string>
+    <string name="salary_content">月給30万</string>
+    <string name="employment_status_content">正社員</string>
+    <string name="holiday_content">日、祝日</string>
+    <string name="insurance_content">雇用保険、労災保険</string>
+    <string name="test_period_content">あり(3ヶ月)</string>
+    <string name="tel">電話番号</string>
+    <string name="industry">業種</string>
+    <string name="taptext">企業検索アプリ</string>
 </resources>
